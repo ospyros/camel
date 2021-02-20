@@ -166,7 +166,7 @@ You can append query options to the URI in the following format,
 
 
 // component options: START
-The SMPP component supports 38 options, which are listed below.
+The SMPP component supports 39 options, which are listed below.
 
 
 
@@ -211,6 +211,7 @@ The SMPP component supports 38 options, which are listed below.
 | *password* (security) | The password for connecting to SMSC server. |  | String
 | *systemId* (security) | The system id (username) for connecting to SMSC server. | smppclient | String
 | *usingSSL* (security) | Whether using SSL with the smpps protocol | false | boolean
+| *sessionGroupId* (sessionGroupId) | Session group id this endpoint will belong. Endpoints belonging to the same group share the same PDU task executor. In order for this parameter to take effect use the 'smpp(s)-grp' prefix in the uri |  | String
 |===
 // component options: END
 
@@ -239,7 +240,7 @@ with the following path and query parameters:
 |===
 
 
-=== Query Parameters (39 parameters):
+=== Query Parameters (40 parameters):
 
 
 [width="100%",cols="2,5,^1,2",options="header"]
@@ -284,6 +285,7 @@ with the following path and query parameters:
 | *password* (security) | The password for connecting to SMSC server. |  | String
 | *systemId* (security) | The system id (username) for connecting to SMSC server. | smppclient | String
 | *usingSSL* (security) | Whether using SSL with the smpps protocol | false | boolean
+| *sessionGroupId* (sessionGroupId) | Session group id this endpoint will belong. Endpoints belonging to the same group share the same PDU task executor. In order for this parameter to take effect use the 'smpp(s)-grp' prefix in the uri |  | String
 |===
 // endpoint options: END
 

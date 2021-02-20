@@ -313,6 +313,8 @@ public interface EndpointBuilderFactory
             org.apache.camel.builder.endpoint.dsl.SjmsEndpointBuilderFactory.SjmsBuilders,
             org.apache.camel.builder.endpoint.dsl.SlackEndpointBuilderFactory.SlackBuilders,
             org.apache.camel.builder.endpoint.dsl.SmppEndpointBuilderFactory.SmppBuilders,
+            org.apache.camel.builder.endpoint.dsl.SmppGroupsEndpointBuilderFactory.SmppGroupsBuilders,
+            org.apache.camel.builder.endpoint.dsl.SmppSessionGroupsEndpointBuilderFactory.SmppSessionGroupsBuilders,
             org.apache.camel.builder.endpoint.dsl.SnmpEndpointBuilderFactory.SnmpBuilders,
             org.apache.camel.builder.endpoint.dsl.Sns2EndpointBuilderFactory.Sns2Builders,
             org.apache.camel.builder.endpoint.dsl.SnsEndpointBuilderFactory.SnsBuilders,

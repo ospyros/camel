@@ -212,7 +212,8 @@ public class SmppConfigurationTest {
                           + "httpProxyUsername=null, "
                           + "httpProxyPassword=null, "
                           + "splittingPolicy=ALLOW, "
-                          + "proxyHeaders=null]";
+                          + "proxyHeaders=null, "
+                          + "sessionGroupId=null]";
 
         assertEquals(expected, configuration.toString());
     }

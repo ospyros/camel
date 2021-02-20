@@ -112,6 +112,8 @@ public class SmppConfiguration implements Cloneable {
     private SessionStateListener sessionStateListener;
     @UriParam(defaultValue = "ALLOW")
     private SmppSplittingPolicy splittingPolicy = SmppSplittingPolicy.ALLOW;
+    @UriParam(label = "sessionGroupId")
+    private String sessionGroupId;
 
     /**
      * A POJO which contains all necessary configuration parameters for the SMPP connection
@@ -676,6 +678,18 @@ public class SmppConfiguration implements Cloneable {
         return proxyHeaders;
     }
 
+    /**
+     * Session group id this endpoint will belong. Endpoints belonging to the same group share the same PDU task
+     * executor. In order for this parameter to take effect use the 'smpp(s)-grp' prefix in the uri
+     */
+    public void setSessionGroupId(String sessionGroupId) {
+        this.sessionGroupId = sessionGroupId;
+    }
+
+    public String getSessionGroupId() {
+        return sessionGroupId;
+    }
+
     @Override
     public String toString() {
         return "SmppConfiguration[usingSSL=" + usingSSL
@@ -713,6 +727,7 @@ public class SmppConfiguration implements Cloneable {
                + ", httpProxyPassword=" + httpProxyPassword
                + ", splittingPolicy=" + splittingPolicy
                + ", proxyHeaders=" + proxyHeaders
+               + ", sessionGroupId=" + sessionGroupId
                + "]";
     }
 }

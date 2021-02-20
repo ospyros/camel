@@ -74,6 +74,8 @@ public class SmppEndpointConfigurer extends PropertyConfigurerSupport implements
         case "replaceIfPresentFlag": target.getConfiguration().setReplaceIfPresentFlag(property(camelContext, byte.class, value)); return true;
         case "servicetype":
         case "serviceType": target.getConfiguration().setServiceType(property(camelContext, java.lang.String.class, value)); return true;
+        case "sessiongroupid":
+        case "sessionGroupId": target.getConfiguration().setSessionGroupId(property(camelContext, java.lang.String.class, value)); return true;
         case "sessionstatelistener":
         case "sessionStateListener": target.getConfiguration().setSessionStateListener(property(camelContext, org.jsmpp.session.SessionStateListener.class, value)); return true;
         case "sourceaddr":
@@ -155,6 +157,8 @@ public class SmppEndpointConfigurer extends PropertyConfigurerSupport implements
         case "replaceIfPresentFlag": return byte.class;
         case "servicetype":
         case "serviceType": return java.lang.String.class;
+        case "sessiongroupid":
+        case "sessionGroupId": return java.lang.String.class;
         case "sessionstatelistener":
         case "sessionStateListener": return org.jsmpp.session.SessionStateListener.class;
         case "sourceaddr":
@@ -237,6 +241,8 @@ public class SmppEndpointConfigurer extends PropertyConfigurerSupport implements
         case "replaceIfPresentFlag": return target.getConfiguration().getReplaceIfPresentFlag();
         case "servicetype":
         case "serviceType": return target.getConfiguration().getServiceType();
+        case "sessiongroupid":
+        case "sessionGroupId": return target.getConfiguration().getSessionGroupId();
         case "sessionstatelistener":
         case "sessionStateListener": return target.getConfiguration().getSessionStateListener();
         case "sourceaddr":

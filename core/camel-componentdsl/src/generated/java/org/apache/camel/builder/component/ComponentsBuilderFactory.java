@@ -4030,6 +4030,19 @@ public interface ComponentsBuilderFactory {
         return org.apache.camel.builder.component.dsl.SmppComponentBuilderFactory.smpp();
     }
     /**
+     * SMPP-GROUP (camel-smpp)
+     * Camel SMPP support
+     * 
+     * Category: mobile
+     * Since: 3.7
+     * Maven coordinates: org.apache.camel:camel-smpp
+     * 
+     * @return the dsl builder
+     */
+    static org.apache.camel.builder.component.dsl.SmppGrpComponentBuilderFactory.SmppGrpComponentBuilder smppGrp() {
+        return org.apache.camel.builder.component.dsl.SmppGrpComponentBuilderFactory.smppGrp();
+    }
+    /**
      * SMPP (Secure) (camel-smpp)
      * Send and receive SMS messages using a SMSC (Short Message Service
      * Center).
@@ -4042,6 +4055,19 @@ public interface ComponentsBuilderFactory {
      */
     static org.apache.camel.builder.component.dsl.SmppsComponentBuilderFactory.SmppsComponentBuilder smpps() {
         return org.apache.camel.builder.component.dsl.SmppsComponentBuilderFactory.smpps();
+    }
+    /**
+     * SMPP-GROUP (camel-smpp)
+     * Camel SMPP support
+     * 
+     * Category: mobile
+     * Since: 3.7
+     * Maven coordinates: org.apache.camel:camel-smpp
+     * 
+     * @return the dsl builder
+     */
+    static org.apache.camel.builder.component.dsl.SmppsGrpComponentBuilderFactory.SmppsGrpComponentBuilder smppsGrp() {
+        return org.apache.camel.builder.component.dsl.SmppsGrpComponentBuilderFactory.smppsGrp();
     }
     /**
      * SMTP (camel-mail)

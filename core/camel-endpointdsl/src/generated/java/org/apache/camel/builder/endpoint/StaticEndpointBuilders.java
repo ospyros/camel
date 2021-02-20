@@ -13912,6 +13912,59 @@ public class StaticEndpointBuilders {
         return org.apache.camel.builder.endpoint.dsl.SmppEndpointBuilderFactory.endpointBuilder(componentName, path);
     }
     /**
+     * SMPP-GROUP (camel-smpp)
+     * Camel SMPP support
+     * 
+     * Category: mobile
+     * Since: 3.7
+     * Maven coordinates: org.apache.camel:camel-smpp
+     * 
+     * Syntax: <code>smpp-grp:host:port</code>
+     * 
+     * Path parameter: host
+     * Hostname for the SMSC server to use.
+     * Default value: localhost
+     * 
+     * Path parameter: port
+     * Port number for the SMSC server to use.
+     * Default value: 2775
+     * 
+     * @param path host:port
+     * @return the dsl builder
+     */
+    public static org.apache.camel.builder.endpoint.dsl.SmppSessionGroupsEndpointBuilderFactory.SmppSessionGroupsEndpointBuilder smppGrp(
+            String path) {
+        return org.apache.camel.builder.endpoint.dsl.SmppSessionGroupsEndpointBuilderFactory.endpointBuilder("smpp-grp", path);
+    }
+    /**
+     * SMPP-GROUP (camel-smpp)
+     * Camel SMPP support
+     * 
+     * Category: mobile
+     * Since: 3.7
+     * Maven coordinates: org.apache.camel:camel-smpp
+     * 
+     * Syntax: <code>smpp-grp:host:port</code>
+     * 
+     * Path parameter: host
+     * Hostname for the SMSC server to use.
+     * Default value: localhost
+     * 
+     * Path parameter: port
+     * Port number for the SMSC server to use.
+     * Default value: 2775
+     * 
+     * @param componentName to use a custom component name for the endpoint
+     * instead of the default name
+     * @param path host:port
+     * @return the dsl builder
+     */
+    public static org.apache.camel.builder.endpoint.dsl.SmppSessionGroupsEndpointBuilderFactory.SmppSessionGroupsEndpointBuilder smppGrp(
+            String componentName,
+            String path) {
+        return org.apache.camel.builder.endpoint.dsl.SmppSessionGroupsEndpointBuilderFactory.endpointBuilder(componentName, path);
+    }
+    /**
      * SNMP (camel-snmp)
      * Receive traps and poll SNMP (Simple Network Management Protocol) capable
      * devices.

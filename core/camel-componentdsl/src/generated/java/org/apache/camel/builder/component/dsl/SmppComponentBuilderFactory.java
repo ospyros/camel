@@ -714,6 +714,23 @@ public interface SmppComponentBuilderFactory {
             doSetProperty("usingSSL", usingSSL);
             return this;
         }
+        /**
+         * Session group id this endpoint will belong. Endpoints belonging to
+         * the same group share the same PDU task executor. In order for this
+         * parameter to take effect use the 'smpp(s)-grp' prefix in the uri.
+         * 
+         * The option is a: &lt;code&gt;java.lang.String&lt;/code&gt; type.
+         * 
+         * Group: sessionGroupId
+         * 
+         * @param sessionGroupId the value to set
+         * @return the dsl builder
+         */
+        default SmppComponentBuilder sessionGroupId(
+                java.lang.String sessionGroupId) {
+            doSetProperty("sessionGroupId", sessionGroupId);
+            return this;
+        }
     }
 
     class SmppComponentBuilderImpl
@@ -776,6 +793,7 @@ public interface SmppComponentBuilderFactory {
             case "password": getOrCreateConfiguration((SmppComponent) component).setPassword((java.lang.String) value); return true;
             case "systemId": getOrCreateConfiguration((SmppComponent) component).setSystemId((java.lang.String) value); return true;
             case "usingSSL": getOrCreateConfiguration((SmppComponent) component).setUsingSSL((boolean) value); return true;
+            case "sessionGroupId": getOrCreateConfiguration((SmppComponent) component).setSessionGroupId((java.lang.String) value); return true;
             default: return false;
             }
         }

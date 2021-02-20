@@ -18,6 +18,7 @@ package org.apache.camel.component.smpp;
 
 import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Function;
 
 import org.apache.camel.Processor;
 import org.apache.camel.support.DefaultConsumer;
@@ -50,14 +51,29 @@ public class SmppConsumer extends DefaultConsumer {
     private SessionStateListener internalSessionStateListener;
 
     private final ReentrantLock reconnectLock = new ReentrantLock();
+    private final Function<SmppConfiguration, SMPPSession> smppSessionFactory;
 
     /**
      * The constructor which gets a smpp endpoint, a smpp configuration and a processor
      */
     public SmppConsumer(SmppEndpoint endpoint, SmppConfiguration config, Processor processor) {
-        super(endpoint, processor);
+        this(endpoint, config, processor,
+             smppConfiguration -> new SMPPSession(
+                     new SynchronizedPDUSender(
+                             new DefaultPDUSender(
+                                     new DefaultComposer())),
+                     new DefaultPDUReader(), SmppConnectionFactory
+                             .getInstance(smppConfiguration)));
+    }
 
+    /**
+     * Constructor accepting an SmppSession factory method based on configuration
+     */
+    public SmppConsumer(SmppEndpoint endpoint, SmppConfiguration config, Processor processor,
+                        Function<SmppConfiguration, SMPPSession> smppSessionFactory) {
+        super(endpoint, processor);
         this.configuration = config;
+        this.smppSessionFactory = smppSessionFactory;
         this.internalSessionStateListener = new SessionStateListener() {
             @Override
             public void onStateChange(SessionState newState, SessionState oldState, Session source) {
@@ -86,7 +102,7 @@ public class SmppConsumer extends DefaultConsumer {
     }
 
     private SMPPSession createSession() throws IOException {
-        SMPPSession session = createSMPPSession();
+        SMPPSession session = smppSessionFactory.apply(configuration);
         session.setEnquireLinkTimer(configuration.getEnquireLinkTimer());
         session.setTransactionTimer(configuration.getTransactionTimer());
         session.addSessionStateListener(internalSessionStateListener);
@@ -99,20 +115,6 @@ public class SmppConsumer extends DefaultConsumer {
                         configuration.getAddressRange()));
 
         return session;
-    }
-
-    /**
-     * Factory method to easily instantiate a mock SMPPSession
-     * 
-     * @return the SMPPSession
-     */
-    SMPPSession createSMPPSession() {
-        return new SMPPSession(
-                new SynchronizedPDUSender(
-                        new DefaultPDUSender(
-                                new DefaultComposer())),
-                new DefaultPDUReader(), SmppConnectionFactory
-                        .getInstance(configuration));
     }
 
     @Override
@@ -197,7 +199,7 @@ public class SmppConsumer extends DefaultConsumer {
 
     /**
      * Returns the smpp configuration
-     * 
+     *
      * @return the configuration
      */
     public SmppConfiguration getConfiguration() {
