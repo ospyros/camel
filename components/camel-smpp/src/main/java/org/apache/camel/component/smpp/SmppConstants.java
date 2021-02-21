@@ -63,6 +63,7 @@ public interface SmppConstants {
     String OPTIONAL_PARAMETERS = "CamelSmppOptionalParameters";
     String OPTIONAL_PARAMETER = "CamelSmppOptionalParameter";
     String SPLITTING_POLICY = "CamelSmppSplittingPolicy";
+    String SESSION_GROUP_ID = "sessionGroupId";
 
     String UCS2_ENCODING = "UTF-16BE";
     byte UNKNOWN_ALPHABET = -1;

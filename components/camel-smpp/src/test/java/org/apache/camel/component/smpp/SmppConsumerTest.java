@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.smpp;
 
+import java.util.function.Function;
+
 import org.apache.camel.Processor;
 import org.jsmpp.bean.BindType;
 import org.jsmpp.bean.NumberingPlanIndicator;
@@ -59,12 +61,12 @@ public class SmppConsumerTest {
         consumer = new SmppConsumer(
                 endpoint,
                 configuration,
-                processor) {
-
-            SMPPSession createSMPPSession() {
-                return session;
-            }
-        };
+                processor, new Function<SmppConfiguration, SMPPSession>() {
+                    @Override
+                    public SMPPSession apply(SmppConfiguration smppConfiguration) {
+                        return session;
+                    }
+                });
     }
 
     @Test
