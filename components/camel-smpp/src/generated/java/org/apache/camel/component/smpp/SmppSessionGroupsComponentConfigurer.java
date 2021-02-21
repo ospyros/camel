@@ -47,8 +47,6 @@ public class SmppSessionGroupsComponentConfigurer extends PropertyConfigurerSupp
         case "encoding": getOrCreateConfiguration(target).setEncoding(property(camelContext, java.lang.String.class, value)); return true;
         case "enquirelinktimer":
         case "enquireLinkTimer": getOrCreateConfiguration(target).setEnquireLinkTimer(property(camelContext, java.lang.Integer.class, value)); return true;
-        case "groupconfigurations":
-        case "groupConfigurations": target.setGroupConfigurations(property(camelContext, java.util.List.class, value)); return true;
         case "httpproxyhost":
         case "httpProxyHost": getOrCreateConfiguration(target).setHttpProxyHost(property(camelContext, java.lang.String.class, value)); return true;
         case "httpproxypassword":
@@ -130,8 +128,6 @@ public class SmppSessionGroupsComponentConfigurer extends PropertyConfigurerSupp
         case "encoding": return java.lang.String.class;
         case "enquirelinktimer":
         case "enquireLinkTimer": return java.lang.Integer.class;
-        case "groupconfigurations":
-        case "groupConfigurations": return java.util.List.class;
         case "httpproxyhost":
         case "httpProxyHost": return java.lang.String.class;
         case "httpproxypassword":
@@ -214,8 +210,6 @@ public class SmppSessionGroupsComponentConfigurer extends PropertyConfigurerSupp
         case "encoding": return getOrCreateConfiguration(target).getEncoding();
         case "enquirelinktimer":
         case "enquireLinkTimer": return getOrCreateConfiguration(target).getEnquireLinkTimer();
-        case "groupconfigurations":
-        case "groupConfigurations": return target.getGroupConfigurations();
         case "httpproxyhost":
         case "httpProxyHost": return getOrCreateConfiguration(target).getHttpProxyHost();
         case "httpproxypassword":
@@ -278,8 +272,6 @@ public class SmppSessionGroupsComponentConfigurer extends PropertyConfigurerSupp
     @Override
     public Object getCollectionValueType(Object target, String name, boolean ignoreCase) {
         switch (ignoreCase ? name.toLowerCase() : name) {
-        case "groupconfigurations":
-        case "groupConfigurations": return org.apache.camel.component.smpp.SmppSessionGroupConfiguration.class;
         case "proxyheaders":
         case "proxyHeaders": return java.lang.String.class;
         default: return null;

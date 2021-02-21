@@ -118,23 +118,6 @@ public interface SmppsGrpComponentBuilderFactory {
             return this;
         }
         /**
-         * Smpp groups configuration used to generate and initialize smpp
-         * session groups.
-         * 
-         * The option is a:
-         * &lt;code&gt;java.util.List&amp;lt;org.apache.camel.component.smpp.SmppSessionGroupConfiguration&amp;gt;&lt;/code&gt; type.
-         * 
-         * Group: advanced
-         * 
-         * @param groupConfigurations the value to set
-         * @return the dsl builder
-         */
-        default SmppsGrpComponentBuilder groupConfigurations(
-                java.util.List<org.apache.camel.component.smpp.SmppSessionGroupConfiguration> groupConfigurations) {
-            doSetProperty("groupConfigurations", groupConfigurations);
-            return this;
-        }
-        /**
          * Defines the initial delay in milliseconds after the consumer/producer
          * tries to reconnect to the SMSC, after the connection was lost.
          * 
@@ -781,7 +764,6 @@ public interface SmppsGrpComponentBuilderFactory {
             case "bridgeErrorHandler": ((SmppSessionGroupsComponent) component).setBridgeErrorHandler((boolean) value); return true;
             case "lazyStartProducer": ((SmppSessionGroupsComponent) component).setLazyStartProducer((boolean) value); return true;
             case "autowiredEnabled": ((SmppSessionGroupsComponent) component).setAutowiredEnabled((boolean) value); return true;
-            case "groupConfigurations": ((SmppSessionGroupsComponent) component).setGroupConfigurations((java.util.List) value); return true;
             case "initialReconnectDelay": getOrCreateConfiguration((SmppSessionGroupsComponent) component).setInitialReconnectDelay((long) value); return true;
             case "maxReconnect": getOrCreateConfiguration((SmppSessionGroupsComponent) component).setMaxReconnect((int) value); return true;
             case "reconnectDelay": getOrCreateConfiguration((SmppSessionGroupsComponent) component).setReconnectDelay((long) value); return true;

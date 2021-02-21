@@ -29,18 +29,6 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
     private Map<String, SmppSessionGroup> smppSessionGroups = new HashMap<>();
 
     @Override
-    public void doStart() throws Exception {
-        super.doStart();
-
-        for (SmppSessionGroupConfiguration groupConfiguration : groupConfigurations) {
-            SmppSessionGroup smppSessionGroup = new SmppSessionGroup(
-                    groupConfiguration.getPduProcessorCoreDegree(),
-                    groupConfiguration.getPduProcessorMaxDegree(), groupConfiguration.getPduProcessorQueueCapacity());
-            smppSessionGroups.put(groupConfiguration.getId(), smppSessionGroup);
-        }
-    }
-
-    @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
         if (this.configuration == null) {
             this.configuration = new SmppConfiguration();
@@ -48,7 +36,7 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
         // create a copy of the configuration as other endpoints can adjust their copy as well
         SmppConfiguration config = this.configuration.copy();
         config.configureFromURI(new URI(uri));
-        String groupId = config.getSessionGroupId();
+        String groupId = (String) parameters.get(SmppConstants.SESSION_GROUP_ID);
         if (groupId == null) {
             LOG.warn("No group id set for host: {} - port: {} - system type: {} - system id: {}. " +
                      "Returning a standalone SmppEndpoint.",
@@ -70,11 +58,18 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
     /**
      * Smpp groups configuration used to generate and initialize smpp session groups.
      */
-    public void setGroupConfigurations(List<SmppSessionGroupConfiguration> groupConfigurations) {
+    public void setComponentConfiguration(List<SmppSessionGroupConfiguration> groupConfigurations) {
         this.groupConfigurations = groupConfigurations;
+
+        for (SmppSessionGroupConfiguration groupConfiguration : groupConfigurations) {
+            SmppSessionGroup smppSessionGroup = new SmppSessionGroup(
+                    groupConfiguration.getPduProcessorCoreDegree(),
+                    groupConfiguration.getPduProcessorMaxDegree(), groupConfiguration.getPduProcessorQueueCapacity());
+            smppSessionGroups.put(groupConfiguration.getId(), smppSessionGroup);
+        }
     }
 
-    public List<SmppSessionGroupConfiguration> getGroupConfigurations() {
+    public List<SmppSessionGroupConfiguration> getComponentConfiguration() {
         return groupConfigurations;
     }
 
