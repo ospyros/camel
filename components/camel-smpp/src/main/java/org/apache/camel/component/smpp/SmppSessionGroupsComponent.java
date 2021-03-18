@@ -39,16 +39,16 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
         String groupId = (String) parameters.get(SmppConstants.SESSION_GROUP_ID);
         if (groupId == null) {
             LOG.warn("No group id set for host: {} - port: {} - system type: {} - system id: {}. " +
-                     "Returning a standalone SmppEndpoint.",
-                    config.getHost(),
-                    config.getPort(), config.getSystemType(), config.getSystemId());
+                    "Returning a standalone SmppEndpoint.", config.getHost(), config.getPort(),
+                    config.getSystemType(), config.getSystemId()
+            );
             return new SmppEndpoint(uri, this, config);
         }
+
         SmppSessionGroup sessionGroup = smppSessionGroups.get(groupId);
         if (sessionGroup == null) {
             LOG.warn("Group id {} has not been configured. Creating it with default parameters. " +
-                     "This will most likely negatively impact performance." +
-                     config.getSessionGroupId());
+                     "This will most likely negatively impact performance.", config.getSessionGroupId());
             sessionGroup = new SmppSessionGroup();
             smppSessionGroups.put(groupId, sessionGroup);
         }
