@@ -60,7 +60,6 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
      */
     public void setComponentConfiguration(List<SmppSessionGroupConfiguration> groupConfigurations) {
         this.groupConfigurations = groupConfigurations;
-
         for (SmppSessionGroupConfiguration groupConfiguration : groupConfigurations) {
             SMPPSessionGroup smppSessionGroup = new SMPPSessionGroup(
                     groupConfiguration.getPduProcessorCoreDegree(),
