@@ -55,12 +55,19 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
         return new SmppSessionGroupsEndpoint(sessionGroup, uri, this, config);
     }
 
+    @Override
+    public void stop() {
+        for (SMPPSessionGroup group : smppSessionGroups.values()) {
+            group.shutdown();
+        }
+        super.stop();
+    }
+
     /**
      * Smpp groups configuration used to generate and initialize smpp session groups.
      */
     public void setComponentConfiguration(List<SmppSessionGroupConfiguration> groupConfigurations) {
         this.groupConfigurations = groupConfigurations;
-
         for (SmppSessionGroupConfiguration groupConfiguration : groupConfigurations) {
             SMPPSessionGroup smppSessionGroup = new SMPPSessionGroup(
                     groupConfiguration.getPduProcessorCoreDegree(),
