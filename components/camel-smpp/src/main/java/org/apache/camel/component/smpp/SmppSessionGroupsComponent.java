@@ -10,7 +10,7 @@ import org.apache.camel.Endpoint;
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.annotations.Component;
 import org.apache.camel.support.DefaultComponent;
-import org.jsmpp.session.SmppSessionGroup;
+import org.jsmpp.session.SMPPSessionGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
 
     private SmppConfiguration configuration;
 
-    private Map<String, SmppSessionGroup> smppSessionGroups = new HashMap<>();
+    private Map<String, SMPPSessionGroup> smppSessionGroups = new HashMap<>();
 
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
@@ -44,15 +44,23 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
             );
             return new SmppEndpoint(uri, this, config);
         }
-
-        SmppSessionGroup sessionGroup = smppSessionGroups.get(groupId);
+        SMPPSessionGroup sessionGroup = smppSessionGroups.get(groupId);
         if (sessionGroup == null) {
             LOG.warn("Group id {} has not been configured. Creating it with default parameters. " +
-                     "This will most likely negatively impact performance.", config.getSessionGroupId());
-            sessionGroup = new SmppSessionGroup();
+                     "This will most likely negatively impact performance." +
+                     config.getSessionGroupId());
+            sessionGroup = new SMPPSessionGroup();
             smppSessionGroups.put(groupId, sessionGroup);
         }
         return new SmppSessionGroupsEndpoint(sessionGroup, uri, this, config);
+    }
+
+    @Override
+    public void stop() {
+        for (SMPPSessionGroup group : smppSessionGroups.values()) {
+            group.shutdown();
+        }
+        super.stop();
     }
 
     /**
@@ -60,9 +68,8 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
      */
     public void setComponentConfiguration(List<SmppSessionGroupConfiguration> groupConfigurations) {
         this.groupConfigurations = groupConfigurations;
-
         for (SmppSessionGroupConfiguration groupConfiguration : groupConfigurations) {
-            SmppSessionGroup smppSessionGroup = new SmppSessionGroup(
+            SMPPSessionGroup smppSessionGroup = new SMPPSessionGroup(
                     groupConfiguration.getPduProcessorCoreDegree(),
                     groupConfiguration.getPduProcessorMaxDegree(), groupConfiguration.getPduProcessorQueueCapacity());
             smppSessionGroups.put(groupConfiguration.getId(), smppSessionGroup);

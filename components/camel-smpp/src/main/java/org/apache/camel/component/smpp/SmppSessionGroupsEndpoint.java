@@ -2,14 +2,14 @@ package org.apache.camel.component.smpp;
 
 import org.apache.camel.*;
 import org.apache.camel.spi.UriEndpoint;
-import org.jsmpp.session.SmppSessionGroup;
+import org.jsmpp.session.SMPPSessionGroup;
 
 @UriEndpoint(firstVersion = "3.7.0", scheme = "smpp-grp,smpps-grp", title = "SMPP-GROUP", syntax = "smpp:host:port",
              category = { Category.MOBILE }, lenientProperties = true)
 public class SmppSessionGroupsEndpoint extends SmppEndpoint {
-    private final SmppSessionGroup smppSessionGroup;
+    private final SMPPSessionGroup smppSessionGroup;
 
-    public SmppSessionGroupsEndpoint(SmppSessionGroup smppSessionGroup, String endpointUri, Component component,
+    public SmppSessionGroupsEndpoint(SMPPSessionGroup smppSessionGroup, String endpointUri, Component component,
                                      SmppConfiguration configuration) {
         super(endpointUri, component, configuration);
         if (smppSessionGroup == null) {
