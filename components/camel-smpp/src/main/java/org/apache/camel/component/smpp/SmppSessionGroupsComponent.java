@@ -39,9 +39,9 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
         String groupId = (String) parameters.get(SmppConstants.SESSION_GROUP_ID);
         if (groupId == null) {
             LOG.warn("No group id set for host: {} - port: {} - system type: {} - system id: {}. " +
-                     "Returning a standalone SmppEndpoint.",
-                    config.getHost(),
-                    config.getPort(), config.getSystemType(), config.getSystemId());
+                    "Returning a standalone SmppEndpoint.", config.getHost(), config.getPort(),
+                    config.getSystemType(), config.getSystemId()
+            );
             return new SmppEndpoint(uri, this, config);
         }
         SMPPSessionGroup sessionGroup = smppSessionGroups.get(groupId);
