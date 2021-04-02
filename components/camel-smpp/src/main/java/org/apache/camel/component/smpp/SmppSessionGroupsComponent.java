@@ -46,8 +46,8 @@ public class SmppSessionGroupsComponent extends DefaultComponent {
         }
         SMPPSessionGroup sessionGroup = smppSessionGroups.get(groupId);
         if (sessionGroup == null) {
-            LOG.warn("Group id {} has not been configured. Creating it with default parameters. " + 
-                "This will most likely negatively impact performance.", config.getSessionGroupId());
+            LOG.warn("Group id {} has not been configured and will be created with default parameters. " +
+                    "This will most likely negatively impact performance.", config.getSessionGroupId());
             sessionGroup = new SMPPSessionGroup();
             smppSessionGroups.put(groupId, sessionGroup);
         }
